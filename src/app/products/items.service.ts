@@ -19,8 +19,14 @@ export class ItemsService {
     );
   }
 
-  productIsInShoppingCart(product: Product) {
-    // TODO CHECK
+  productIsInShoppingCart(product: Product): boolean {
+    let result = false;
+    this.items.map((item) => {
+      if (item.getProduct() === product) {
+        result = true;
+      }
+    });
+    return result;
   }
 
   getItems() {

@@ -3,38 +3,42 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ItemsService } from '../products/items.service';
 import { Item } from '../products/item.model';
+import { DataProviderService } from '../shared/dataprovider.service';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css'],
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
-  items: Item[];
+export class ShoppingCartComponent implements OnInit {
+  items: Item[] = [];
+  successfullySent = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private provider: DataProviderService
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.itemsService.itemsChanged.subscribe(
-      (items: Item[]) => {
-        this.items = items;
-      }
-    );
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.items = this.itemsService.getItems();
   }
 
   getSum() {
     let sum = 0;
     this.items.forEach((i) => {
-      sum += i.getProduct().price + i.getQuantity();
+      sum += i.getProduct().price * i.getQuantity();
     });
     return sum;
+  }
+
+  onSubmitOrder() {
+    this.provider
+      .sendOrder(this.getSum(), this.items, new Date())
+      .subscribe((response) => {
+        if (response.status === 200) {
+          this.successfullySent = true;
+        }
+      });
   }
 }

@@ -18,20 +18,46 @@
           *ngFor="let i of items"
         >
           <div>
-            <h6 class="my-0">{{ i.getProduct().name }}</h6>
-            <small class="text-muted">{{ i.getProduct().description }}</small>
+            <h6 class="my-0">
+              {{ i.getProduct().name
+              }}<span
+                class="badge badge-primary badge-pill"
+                style="margin-left: 10px;"
+                >{{ i.getQuantity() }}</span
+              >
+            </h6>
+            <div class="text-muted item-info">
+              {{ i.getProduct().description }}
+            </div>
           </div>
-          <span class="text-muted">{{ i.getProduct().price }} EUR</span>
+          <span class="text-muted">{{
+            i.getProduct().price | currency: "EUR":"symbol":"1.2-2"
+          }}</span>
         </li>
         <li class="list-group-item d-flex justify-content-between">
           <span>Total (EUR)</span>
-          <strong>{{ getSum() }}</strong>
+          <strong>{{ getSum() | currency: "EUR":"symbol":"1.2-2" }}</strong>
         </li>
       </ul>
+      <button
+        type="button"
+        class="btn btn-danger btn-lg btn-block"
+        (click)="onSubmitOrder()"
+        [disabled]="items.length < 1"
+      >
+        Submit order
+      </button>
     </div>
 
     <div class="col-md-8 order-md-1">
-      Form with validation and submit button in progress.
+      Form with validation may be added one day.
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12" *ngIf="successfullySent">
+      <div class="alert alert-success" role="alert">
+        Your order was successfully accepted. Have a nice day.
+      </div>
     </div>
   </div>
 </div>
