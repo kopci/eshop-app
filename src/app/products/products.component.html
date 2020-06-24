@@ -1,0 +1,11 @@
+<div class="album py-5">
+  <div class="container">
+    <div class="row">
+      <app-product
+        *ngFor="let p of products"
+        class="col-md-4"
+        [product]="p"
+      ></app-product>
+    </div>
+  </div>
+</div>

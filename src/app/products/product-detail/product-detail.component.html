@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div
+      style="width: 500px; height: 300px; background-color: cornflowerblue;"
+    ></div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card-body" style="height: 160px;">
+      <p class="card-text p-d-custom-name">{{ product.name }}</p>
+      <p class="text-muted p-d-custom-desc">{{ product.description }}</p>
+    </div>
+    <div class="row">
+      <div class="col-sm-5" style="float: right;">
+        <div class="input-group">
+          <input type="number" class="form-control" [(ngModel)]="quantity" />
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button" (click)="onAddItem()">
+              Add to cart
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

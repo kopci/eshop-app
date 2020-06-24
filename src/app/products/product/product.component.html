@@ -1,0 +1,46 @@
+<div class="card mb-4 shadow-sm">
+  <div
+    style="height: 200px; background-color: slateblue; cursor: pointer;"
+    (click)="viewProductDetail()"
+  ></div>
+  <div class="card-body" style="height: 160px;">
+    <p
+      class="card-text"
+      style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+    >
+      {{ product.name }}
+    </p>
+    <p
+      class="text-muted"
+      style="
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+      "
+    >
+      {{ product.description }}
+    </p>
+    <div class="row">
+      <!--
+      <div class="col-sm-5" style="float: left;">
+        <div class="input-group input-group-sm">
+          <span class="input-group-btn">
+            <button class="btn btn-sm">+</button>
+          </span>
+          <input type="number" value="1" class="form-control" />
+          <span class="input-group-btn">
+            <button class="btn btn-sm">-</button>
+          </span>
+        </div>
+      </div>-->
+      <div class="col-sm-12">
+        <div style="float: right; font-weight: bold; color: #f06b71;">
+          {{ product.price }} EUR
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
